@@ -48,7 +48,8 @@ bzw.add_object("options", [
         ["-mp", "0,10,10,0,0,10"], # only red, green and obs allowed
         ["-set _disableBots", 1],
 #        ["-set _sessionTime", 120], # for matches
-        ["-set _tankSpeed", 27]
+        ["-set _tankSpeed", 27],
+#        ["-set _shotsKeepVerticalVelocity", 1]
         ])
 
 ### materials
@@ -121,17 +122,29 @@ bzw.add_object("box", [
         ["size", pybzw.Vector(3, [15, 15, 15])]
         ])
 
+### rail on each side of the base towards mid
+
+bzw.add_object("box", [
+        ["pos",  pybzw.Vector(3, [-70, -107, 0])],
+        ["size", pybzw.Vector(3, [1, 50, 1.4])],
+        ])
+    
+bzw.add_object("box", [
+        ["pos",  pybzw.Vector(3, [70, -107, 0])],
+        ["size", pybzw.Vector(3, [1, 50, 1.4])],
+        ])
+
 ### scattered boxes around bases
 
 for i in range(30, 230, 40):
     bzw.add_object("box", [
-            ["pos",  pybzw.Vector(3, [-60 - (i * 0.4),  -i, 0])],
+            ["pos",  pybzw.Vector(3, [-58.7 - (i * 0.4), -i, 0])],
             ["size", pybzw.Vector(3, [8, 8, 10])],
             ["rotation", 30 - i]
             ])
     
     bzw.add_object("box", [
-            ["pos",  pybzw.Vector(3, [60 + (i * 0.4),  -i, 0])],
+            ["pos",  pybzw.Vector(3, [58.7 + (i * 0.4), -i, 0])],
             ["size", pybzw.Vector(3, [8, 8, 10])],
             ["rotation", -30 + i]
             ])
@@ -141,6 +154,11 @@ for i in range(30, 230, 40):
 bzw.add_object("pyramid", [
         ["pos",  pybzw.Vector(3, [0, -175, 0])],
         ["size", pybzw.Vector(3, [6, 6, 6])]
+        ])
+
+bzw.add_object("pyramid", [
+        ["pos",  pybzw.Vector(3, [-130, 0, 10])],
+        ["size", pybzw.Vector(3, [1, 8, -8])]
         ])
 
 ### base protection
@@ -182,10 +200,17 @@ bzw.add_object("teleporter base", [
         ["border", 1.0]
         ])
 
-bzw.add_object("teleporter platform_mid", [
+bzw.add_object("teleporter platform_outer", [
         ["pos",  pybzw.Vector(3, [0, -140, 15])],
         ["size", pybzw.Vector(3, [0.125, 4, 4])],
         ["rotation", 90],
+        ["border", 1.0]
+        ])
+
+bzw.add_object("teleporter platform_mid", [
+        ["pos",  pybzw.Vector(3, [-38, 0, 12])],
+        ["size", pybzw.Vector(3, [0.125, 4, 2.5])],
+        ["rotation", 0],
         ["border", 1.0]
         ])
 
@@ -214,18 +239,37 @@ bzw.add_object("box", [
         ["size", pybzw.Vector(3, [40, 20, 2])]
         ])
 
-### teleport links (red side)
+### middle teleporters
+
+bzw.add_object("teleporter mid", [
+        ["pos",  pybzw.Vector(3, [0, 0, 0])],
+        ["size", pybzw.Vector(3, [0.125, 4, 2.5])],
+        ["rotation", 0],
+        ["border", 1.0]
+        ])
+
+### teleport links
 
 for side in ["red", "green"]:
     bzw.add_object("link", [
             ["from", side + ":base:f"],
-            ["to", side + ":platform_mid:b"],
+            ["to", side + ":platform_outer:b"],
             ])
 
     bzw.add_object("link", [
-            ["from", side + ":platform_mid:*"],
+            ["from", side + ":platform_outer:*"],
             ["to", side + ":base:f"],
             ])
+
+bzw.add_object("link", [
+        ["from", "mid:b"],
+        ["to", "red:platform_mid:f"],
+        ])
+
+bzw.add_object("link", [
+        ["from", "mid:f"],
+        ["to", "green:platform_mid:f"],
+        ])
 
 ### flag safety zones
 

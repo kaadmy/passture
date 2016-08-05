@@ -79,61 +79,71 @@ box
 end
 
 box
-  pos -72.0 -30.0 0.0
+  pos -70.0 -107.0 0.0
+  size 1.0 50.0 1.4
+end
+
+box
+  pos 70.0 -107.0 0.0
+  size 1.0 50.0 1.4
+end
+
+box
+  pos -70.7 -30.0 0.0
   size 8.0 8.0 10.0
   rotation 0
 end
 
 box
-  pos 72.0 -30.0 0.0
+  pos 70.7 -30.0 0.0
   size 8.0 8.0 10.0
   rotation 0
 end
 
 box
-  pos -88.0 -70.0 0.0
+  pos -86.7 -70.0 0.0
   size 8.0 8.0 10.0
   rotation -40
 end
 
 box
-  pos 88.0 -70.0 0.0
+  pos 86.7 -70.0 0.0
   size 8.0 8.0 10.0
   rotation 40
 end
 
 box
-  pos -104.0 -110.0 0.0
+  pos -102.7 -110.0 0.0
   size 8.0 8.0 10.0
   rotation -80
 end
 
 box
-  pos 104.0 -110.0 0.0
+  pos 102.7 -110.0 0.0
   size 8.0 8.0 10.0
   rotation 80
 end
 
 box
-  pos -120.0 -150.0 0.0
+  pos -118.7 -150.0 0.0
   size 8.0 8.0 10.0
   rotation -120
 end
 
 box
-  pos 120.0 -150.0 0.0
+  pos 118.7 -150.0 0.0
   size 8.0 8.0 10.0
   rotation 120
 end
 
 box
-  pos -136.0 -190.0 0.0
+  pos -134.7 -190.0 0.0
   size 8.0 8.0 10.0
   rotation -160
 end
 
 box
-  pos 136.0 -190.0 0.0
+  pos 134.7 -190.0 0.0
   size 8.0 8.0 10.0
   rotation 160
 end
@@ -141,6 +151,11 @@ end
 pyramid
   pos 0.0 -175.0 0.0
   size 6.0 6.0 6.0
+end
+
+pyramid
+  pos -130.0 0.0 10.0
+  size 1.0 8.0 -8.0
 end
 
 box
@@ -177,10 +192,17 @@ teleporter base
   border 1.0
 end
 
-teleporter platform_mid
+teleporter platform_outer
   pos 0.0 -140.0 15.0
   size 0.125 4.0 4.0
   rotation 90
+  border 1.0
+end
+
+teleporter platform_mid
+  pos -38.0 0.0 12.0
+  size 0.125 4.0 2.5
+  rotation 0
   border 1.0
 end
 
@@ -205,24 +227,41 @@ box
   size 40.0 20.0 2.0
 end
 
-link
-  from red:base:f
-  to red:platform_mid:b
+teleporter mid
+  pos 0.0 0.0 0.0
+  size 0.125 4.0 2.5
+  rotation 0
+  border 1.0
 end
 
 link
-  from red:platform_mid:*
+  from red:base:f
+  to red:platform_outer:b
+end
+
+link
+  from red:platform_outer:*
   to red:base:f
 end
 
 link
   from green:base:f
-  to green:platform_mid:b
+  to green:platform_outer:b
 end
 
 link
-  from green:platform_mid:*
+  from green:platform_outer:*
   to green:base:f
+end
+
+link
+  from mid:b
+  to red:platform_mid:f
+end
+
+link
+  from mid:f
+  to green:platform_mid:f
 end
 
 zone
