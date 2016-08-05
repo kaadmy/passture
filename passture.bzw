@@ -1,0 +1,238 @@
+
+# PYBZW map export module v0.1 by KaadmY
+# Map made by KaadmY
+
+world
+  name "Passture"
+  size 400
+  nowalls
+end
+
+options
+  -c
+  +r
+  -ms 2
+  -mp 0,10,10,0,0,10
+  -set _disableBots 1
+  -set _tankSpeed 27
+end
+
+material
+  name wall
+  addtexture wall
+end
+
+material
+  name nothing
+  noradar
+  noshadow
+  nolighting
+  diffuse 0 0 0 0
+end
+
+physics
+  name death
+  death Next time, you should stay INSIDE the map!
+end
+
+define halfmap
+
+meshbox
+  pos 0.0 351.0 0.0
+  size 152.0 1.0 6.0
+  matref wall
+end
+
+meshbox
+  pos 0.0 375.0 0.0
+  size 49.5 24.5 20.0
+  matref nothing
+  phydrv death
+end
+
+meshbox
+  pos 151.0 0.0 0.0
+  size 1.0 350.0 6.0
+  matref wall
+end
+
+meshbox
+  pos 275.0 0.0 0.0
+  size 124.5 399.5 20.0
+  matref nothing
+  phydrv death
+end
+
+box
+  pos 0.0 -70.0 8.0
+  size 10.0 40.0 5.5
+end
+
+box
+  pos 0.0 -50.0 0.0
+  size 6.0 6.0 8.0
+end
+
+box
+  pos 0.0 -140.0 0.0
+  size 15.0 15.0 15.0
+end
+
+box
+  pos -72.0 -30.0 0.0
+  size 8.0 8.0 10.0
+  rotation 0
+end
+
+box
+  pos 72.0 -30.0 0.0
+  size 8.0 8.0 10.0
+  rotation 0
+end
+
+box
+  pos -88.0 -70.0 0.0
+  size 8.0 8.0 10.0
+  rotation -40
+end
+
+box
+  pos 88.0 -70.0 0.0
+  size 8.0 8.0 10.0
+  rotation 40
+end
+
+box
+  pos -104.0 -110.0 0.0
+  size 8.0 8.0 10.0
+  rotation -80
+end
+
+box
+  pos 104.0 -110.0 0.0
+  size 8.0 8.0 10.0
+  rotation 80
+end
+
+box
+  pos -120.0 -150.0 0.0
+  size 8.0 8.0 10.0
+  rotation -120
+end
+
+box
+  pos 120.0 -150.0 0.0
+  size 8.0 8.0 10.0
+  rotation 120
+end
+
+box
+  pos -136.0 -190.0 0.0
+  size 8.0 8.0 10.0
+  rotation -160
+end
+
+box
+  pos 136.0 -190.0 0.0
+  size 8.0 8.0 10.0
+  rotation 160
+end
+
+pyramid
+  pos 0.0 -175.0 0.0
+  size 6.0 6.0 6.0
+end
+
+box
+  pos 37.0 -300.0 0.0
+  size 30.0 2.0 6.0
+end
+
+box
+  pos -37.0 -300.0 0.0
+  size 30.0 2.0 6.0
+end
+
+box
+  pos 80.0 -280.0 0.0
+  size 30.0 2.0 6.0
+  rotation -40
+end
+
+box
+  pos -80.0 -280.0 0.0
+  size 30.0 2.0 6.0
+  rotation 40
+end
+
+base
+  pos 0.0 -340.0 0.0
+  size 10.0 10.0 0.2
+end
+
+teleporter base
+  pos 0.0 -300.0 0.0
+  size 0.125 4.0 4.0
+  rotation 90
+  border 1.0
+end
+
+teleporter platform_mid
+  pos 0.0 -140.0 15.0
+  size 0.125 4.0 4.0
+  rotation 90
+  border 1.0
+end
+
+enddef
+
+group halfmap
+  name red
+  shift 0.0 0.0 0.0
+  rotation 0
+  team 1
+end
+
+group halfmap
+  name green
+  shift 0.0 0.0 0.0
+  rotation 180
+  team 2
+end
+
+box
+  pos 0.0 0.0 10.0
+  size 40.0 20.0 2.0
+end
+
+link
+  from red:base:f
+  to red:platform_mid:b
+end
+
+link
+  from red:platform_mid:*
+  to red:base:f
+end
+
+link
+  from green:base:f
+  to green:platform_mid:b
+end
+
+link
+  from green:platform_mid:*
+  to green:base:f
+end
+
+zone
+  pos 0.0 -90.0 13.5
+  size 2.0 2.0 10.0
+  safety 1
+end
+
+zone
+  pos 0.0 90.0 13.5
+  size 2.0 2.0 10.0
+  safety 2
+end
