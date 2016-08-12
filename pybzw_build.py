@@ -299,7 +299,7 @@ bzw.add_object("link", [
 ### flag safety zones
 
 bzw.add_object("zone", [ # red safety 1
-        ["pos",  pybzw.Vector(3, [-114, -174, 1.4])],
+        ["pos",  pybzw.Vector(3, [-114, -174, 1.8])],
         ["size", pybzw.Vector(3, [4, 4, 10])],
         ["safety", 1]
         ])
