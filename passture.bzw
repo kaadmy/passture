@@ -79,78 +79,73 @@ box
 end
 
 box
-  pos -70.0 -107.0 0.0
-  size 1.0 50.0 1.4
-end
-
-box
-  pos 70.0 -107.0 0.0
-  size 1.0 50.0 1.4
-end
-
-box
-  pos -70.7 -30.0 0.0
-  size 8.0 8.0 10.0
+  pos -34.0 38.0 0.0
+  size 8.0 8.0 10.6
   rotation 0
 end
 
 box
-  pos 70.7 -30.0 0.0
-  size 8.0 8.0 10.0
+  pos 34.0 38.0 0.0
+  size 8.0 8.0 10.6
   rotation 0
 end
 
 box
-  pos -86.7 -70.0 0.0
-  size 8.0 8.0 10.0
-  rotation -40
+  pos -54.0 76.0 0.0
+  size 8.0 8.0 8.3
+  rotation 45
 end
 
 box
-  pos 86.7 -70.0 0.0
-  size 8.0 8.0 10.0
-  rotation 40
+  pos 54.0 76.0 0.0
+  size 8.0 8.0 8.3
+  rotation 45
 end
 
 box
-  pos -102.7 -110.0 0.0
-  size 8.0 8.0 10.0
-  rotation -80
+  pos -74.0 114.0 0.0
+  size 8.0 8.0 6.0
+  rotation 90
 end
 
 box
-  pos 102.7 -110.0 0.0
-  size 8.0 8.0 10.0
-  rotation 80
+  pos 74.0 114.0 0.0
+  size 8.0 8.0 6.0
+  rotation 90
 end
 
 box
-  pos -118.7 -150.0 0.0
-  size 8.0 8.0 10.0
-  rotation -120
+  pos -94.0 152.0 0.0
+  size 8.0 8.0 3.7
+  rotation 135
 end
 
 box
-  pos 118.7 -150.0 0.0
-  size 8.0 8.0 10.0
-  rotation 120
+  pos 94.0 152.0 0.0
+  size 8.0 8.0 3.7
+  rotation 135
 end
 
 box
-  pos -134.7 -190.0 0.0
-  size 8.0 8.0 10.0
-  rotation -160
+  pos -114.0 190.0 0.0
+  size 8.0 8.0 1.4
+  rotation 180
 end
 
 box
-  pos 134.7 -190.0 0.0
-  size 8.0 8.0 10.0
-  rotation 160
+  pos 114.0 190.0 0.0
+  size 8.0 8.0 1.4
+  rotation 180
+end
+
+box
+  pos 0.0 -180.0 0.0
+  size 8.0 8.0 4.0
 end
 
 pyramid
-  pos 0.0 -175.0 0.0
-  size 6.0 6.0 6.0
+  pos 0.0 -180.0 4.0
+  size 8.0 8.0 4.0
 end
 
 pyramid
@@ -159,25 +154,25 @@ pyramid
 end
 
 box
-  pos 37.0 -300.0 0.0
+  pos 36.5 -300.0 0.0
   size 30.0 2.0 6.0
 end
 
 box
-  pos -37.0 -300.0 0.0
+  pos -36.5 -300.0 0.0
   size 30.0 2.0 6.0
 end
 
 box
-  pos 80.0 -280.0 0.0
+  pos 90.0 -280.0 0.0
   size 30.0 2.0 6.0
-  rotation -40
+  rotation -60
 end
 
 box
-  pos -80.0 -280.0 0.0
+  pos -90.0 -280.0 0.0
   size 30.0 2.0 6.0
-  rotation 40
+  rotation 60
 end
 
 base
@@ -224,7 +219,7 @@ end
 
 box
   pos 0.0 0.0 10.0
-  size 40.0 20.0 2.0
+  size 42.0 20.0 2.0
 end
 
 teleporter mid
@@ -265,13 +260,25 @@ link
 end
 
 zone
-  pos 0.0 -90.0 13.5
-  size 2.0 2.0 10.0
+  pos -114.0 -190.0 1.4
+  size 4.0 4.0 10.0
   safety 1
 end
 
 zone
-  pos 0.0 90.0 13.5
-  size 2.0 2.0 10.0
-  safety 2
+  pos 114.0 -190.0 1.4
+  size 4.0 4.0 10.0
+  safety 1
+end
+
+zone
+  pos -114.0 190.0 1.4
+  size 4.0 4.0 10.0
+  safety 1
+end
+
+zone
+  pos 114.0 190.0 1.4
+  size 4.0 4.0 10.0
+  safety 1
 end

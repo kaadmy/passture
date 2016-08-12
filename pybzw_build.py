@@ -122,39 +122,40 @@ bzw.add_object("box", [
         ["size", pybzw.Vector(3, [15, 15, 15])]
         ])
 
-### rail on each side of the base towards mid
+### scattered boxes around edges
 
-bzw.add_object("box", [
-        ["pos",  pybzw.Vector(3, [-70, -107, 0])],
-        ["size", pybzw.Vector(3, [1, 50, 1.4])],
-        ])
-    
-bzw.add_object("box", [
-        ["pos",  pybzw.Vector(3, [70, -107, 0])],
-        ["size", pybzw.Vector(3, [1, 50, 1.4])],
-        ])
+for i in range(5):
+    x = (i * 20) + 34
+    y = (i * 38) + 38
 
-### scattered boxes around bases
+    r = i * 45
+    h = 10.6 - (i * 2.3)
 
-for i in range(30, 230, 40):
     bzw.add_object("box", [
-            ["pos",  pybzw.Vector(3, [-58.7 - (i * 0.4), -i, 0])],
-            ["size", pybzw.Vector(3, [8, 8, 10])],
-            ["rotation", 30 - i]
+            ["pos",  pybzw.Vector(3, [-x, y, 0])],
+            ["size", pybzw.Vector(3, [8, 8, h])],
+            ["rotation", r]
             ])
     
     bzw.add_object("box", [
-            ["pos",  pybzw.Vector(3, [58.7 + (i * 0.4), -i, 0])],
-            ["size", pybzw.Vector(3, [8, 8, 10])],
-            ["rotation", -30 + i]
+            ["pos",  pybzw.Vector(3, [x, y, 0])],
+            ["size", pybzw.Vector(3, [8, 8, h])],
+            ["rotation", r]
             ])
 
-### pyramids
+### flag return "house"
+
+bzw.add_object("box", [
+        ["pos",  pybzw.Vector(3, [0, -180, 0])],
+        ["size", pybzw.Vector(3, [8, 8, 4])]
+        ])
 
 bzw.add_object("pyramid", [
-        ["pos",  pybzw.Vector(3, [0, -175, 0])],
-        ["size", pybzw.Vector(3, [6, 6, 6])]
+        ["pos",  pybzw.Vector(3, [0, -180, 4])],
+        ["size", pybzw.Vector(3, [8, 8, 4])]
         ])
+
+### rico pyramid at mid edge
 
 bzw.add_object("pyramid", [
         ["pos",  pybzw.Vector(3, [-130, 0, 10])],
@@ -164,25 +165,25 @@ bzw.add_object("pyramid", [
 ### base protection
 
 bzw.add_object("box", [
-        ["pos",  pybzw.Vector(3, [37, -300, 0])],
+        ["pos",  pybzw.Vector(3, [36.5, -300, 0])],
         ["size", pybzw.Vector(3, [30, 2, 6])]
         ])
 
 bzw.add_object("box", [
-        ["pos",  pybzw.Vector(3, [-37, -300, 0])],
+        ["pos",  pybzw.Vector(3, [-36.5, -300, 0])],
         ["size", pybzw.Vector(3, [30, 2, 6])]
         ])
 
 bzw.add_object("box", [
-        ["pos",  pybzw.Vector(3, [80, -280, 0])],
+        ["pos",  pybzw.Vector(3, [90, -280, 0])],
         ["size", pybzw.Vector(3, [30, 2, 6])],
-        ["rotation", -40]
+        ["rotation", -60]
         ])
 
 bzw.add_object("box", [
-        ["pos",  pybzw.Vector(3, [-80, -280, 0])],
+        ["pos",  pybzw.Vector(3, [-90, -280, 0])],
         ["size", pybzw.Vector(3, [30, 2, 6])],
-        ["rotation", 40]
+        ["rotation", 60]
         ])
 
 ### flag base
@@ -236,7 +237,7 @@ bzw.add_object("group halfmap", [
 
 bzw.add_object("box", [
         ["pos",  pybzw.Vector(3, [0, 0, 10])],
-        ["size", pybzw.Vector(3, [40, 20, 2])]
+        ["size", pybzw.Vector(3, [42, 20, 2])]
         ])
 
 ### middle teleporters
@@ -273,16 +274,28 @@ bzw.add_object("link", [
 
 ### flag safety zones
 
-bzw.add_object("zone", [ # red safety
-        ["pos",  pybzw.Vector(3, [0, -90, 13.5])],
-        ["size", pybzw.Vector(3, [2, 2, 10])],
+bzw.add_object("zone", [ # red safety 1
+        ["pos",  pybzw.Vector(3, [-114, -190, 1.4])],
+        ["size", pybzw.Vector(3, [4, 4, 10])],
         ["safety", 1]
         ])
 
-bzw.add_object("zone", [ # green safety
-        ["pos",  pybzw.Vector(3, [0, 90, 13.5])],
-        ["size", pybzw.Vector(3, [2, 2, 10])],
-        ["safety", 2]
+bzw.add_object("zone", [ # red safety 2
+        ["pos",  pybzw.Vector(3, [114, -190, 1.4])],
+        ["size", pybzw.Vector(3, [4, 4, 10])],
+        ["safety", 1]
+        ])
+
+bzw.add_object("zone", [ # green safety 1
+        ["pos",  pybzw.Vector(3, [-114, 190, 1.4])],
+        ["size", pybzw.Vector(3, [4, 4, 10])],
+        ["safety", 1]
+        ])
+
+bzw.add_object("zone", [ # green safety 2
+        ["pos",  pybzw.Vector(3, [114, 190, 1.4])],
+        ["size", pybzw.Vector(3, [4, 4, 10])],
+        ["safety", 1]
         ])
 
 ### save to the .bzw
