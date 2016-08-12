@@ -43,20 +43,30 @@ bzw.add_object("world", [
 
 bzw.add_object("options", [
         ["-c"], # ctf
-        ["+r"],
-        ["-ms", 2],
-        ["-mp", "0,10,10,0,0,10"], # only red, green and obs allowed
-        ["-set _disableBots", 1],
-#        ["-set _sessionTime", 120], # for matches
-        ["-set _tankSpeed", 27],
-#        ["-set _shotsKeepVerticalVelocity", 1]
+        ["+r"], # ricochet
+        ["-j"], # jumping!
+
+        ["-fb"], # flags on objects
+        ["-sb"], # spawns on objects
+
+        ["-tk"], # disable self kill when killing teammates
+
+        ["-mp", "0,6,0,6,0,10"], # only red, blue and obs allowe
+        ["-ms", 2], # 2 shot reloads
+
+        ["-set _jumpVelocity", 7],
+        ["-set _reloadTime", 3.0], # shot reload time
+        ["-set _shotSpeed", 130], # shot speed
+        ["-set _tankSpeed", 25], # tank speed
+        ["-set _shotsKeepVerticalVelocity", 1] # shots aim up and down depending on the tank's vertical velocity
         ])
 
 ### materials
 
 bzw.add_object("material", [
         ["name", "wall"],
-        ["addtexture", "wall"]
+        ["addtexture", "wall"],
+        ["diffuse", pybzw.Vector(3, [0.8, 0.8, 0.8])]
         ])
 
 bzw.add_object("material", [
@@ -64,7 +74,7 @@ bzw.add_object("material", [
         ["noradar"],
         ["noshadow"],
         ["nolighting"],
-        ["diffuse", "0 0 0 0"], # transparent
+        ["diffuse", pybzw.Vector(4, [0, 0, 0, 0])], # transparent
         ])
 
 ### physics drivers
@@ -75,18 +85,18 @@ bzw.add_object("physics", [
 
 ### edge geometry
 
-bzw.add_tag("define", "halfmap")
+bzw.add_tag("define", "halfwall")
 
 # short edge
 bzw.add_object("meshbox", [
         ["pos",  pybzw.Vector(3, [0, 351, 0])],
-        ["size", pybzw.Vector(3, [152, 1, 6])],
+        ["size", pybzw.Vector(3, [152, 1, 8])],
         ["matref", "wall"]
         ])
 
 bzw.add_object("meshbox", [
-        ["pos",  pybzw.Vector(3, [0,  375, 0])],
-        ["size", pybzw.Vector(3, [49.5, 24.5, 20])],
+        ["pos",  pybzw.Vector(3, [0,  376, 0])],
+        ["size", pybzw.Vector(3, [152, 24, 20])],
         ["matref", "nothing"],
         ["phydrv", "death"]
         ])
@@ -94,16 +104,22 @@ bzw.add_object("meshbox", [
 # long edge
 bzw.add_object("meshbox", [
         ["pos",  pybzw.Vector(3, [151, 0, 0])],
-        ["size", pybzw.Vector(3, [1, 350, 6])],
+        ["size", pybzw.Vector(3, [1, 350, 8])],
         ["matref", "wall"]
         ])
 
 bzw.add_object("meshbox", [
-        ["pos",  pybzw.Vector(3, [275, 0, 0])],
-        ["size", pybzw.Vector(3, [124.5, 399.5, 20])],
+        ["pos",  pybzw.Vector(3, [276, 0, 0])],
+        ["size", pybzw.Vector(3, [124, 400, 20])],
         ["matref", "nothing"],
         ["phydrv", "death"]
         ])
+
+bzw.add_tag("enddef", "halfwall") # "halfwall"
+
+### half of the map
+
+bzw.add_tag("define", "halfmap")
 
 ### raised platforms around base areas
 
@@ -126,10 +142,10 @@ bzw.add_object("box", [
 
 for i in range(5):
     x = (i * 20) + 34
-    y = (i * 38) + 38
+    y = (i * 34) + 38
 
     r = i * 45
-    h = 10.6 - (i * 2.3)
+    h = 10.6 - (i * 2.2)
 
     bzw.add_object("box", [
             ["pos",  pybzw.Vector(3, [-x, y, 0])],
@@ -143,16 +159,11 @@ for i in range(5):
             ["rotation", r]
             ])
 
-### flag return "house"
-
-bzw.add_object("box", [
-        ["pos",  pybzw.Vector(3, [0, -180, 0])],
-        ["size", pybzw.Vector(3, [8, 8, 4])]
-        ])
+### flag return pyramid
 
 bzw.add_object("pyramid", [
-        ["pos",  pybzw.Vector(3, [0, -180, 4])],
-        ["size", pybzw.Vector(3, [8, 8, 4])]
+        ["pos",  pybzw.Vector(3, [0, -180, 0])],
+        ["size", pybzw.Vector(3, [8, 8, 8])]
         ])
 
 ### rico pyramid at mid edge
@@ -162,11 +173,16 @@ bzw.add_object("pyramid", [
         ["size", pybzw.Vector(3, [1, 8, -8])]
         ])
 
+bzw.add_object("pyramid", [ # to prevent flag drops
+        ["pos",  pybzw.Vector(3, [-130, 0, 18])],
+        ["size", pybzw.Vector(3, [1, 8, 2])]
+        ])
+
 ### base protection
 
 bzw.add_object("box", [
         ["pos",  pybzw.Vector(3, [36.5, -300, 0])],
-        ["size", pybzw.Vector(3, [30, 2, 6])]
+        ["size", pybzw.Vector(3, [30, 2, 6])],
         ])
 
 bzw.add_object("box", [
@@ -189,7 +205,7 @@ bzw.add_object("box", [
 ### flag base
 bzw.add_object("base", [
         ["pos",  pybzw.Vector(3, [0, -340, 0])],
-        ["size", pybzw.Vector(3, [10, 10, 0.2])]
+        ["size", pybzw.Vector(3, [10, 10, 2.0])]
         ])
 
 ### teleporters
@@ -221,16 +237,24 @@ bzw.add_tag("enddef") # "halfmap"
 
 bzw.add_object("group halfmap", [ 
         ["name", "red"],
-        ["shift", pybzw.Vector(3, [0, 0, 0])],
         ["rotation", 0],
-        ["team", 1]
+        ["team", 1],
+        ["tint", pybzw.Vector(3, [1.0, 0.5, 0.5])]
         ])
 
 bzw.add_object("group halfmap", [
-        ["name", "green"],
-        ["shift", pybzw.Vector(3, [0, 0, 0])],
+        ["name", "blue"],
         ["rotation", 180],
-        ["team", 2]
+        ["team", 3],
+        ["tint", pybzw.Vector(3, [0.5, 0.5, 1.0])]
+        ])
+
+bzw.add_object("group halfwall", [ 
+        ["rotation", 0],
+        ])
+
+bzw.add_object("group halfwall", [
+        ["rotation", 180],
         ])
 
 ### platform around the middle
@@ -251,7 +275,7 @@ bzw.add_object("teleporter mid", [
 
 ### teleport links
 
-for side in ["red", "green"]:
+for side in ["red", "blue"]:
     bzw.add_object("link", [
             ["from", side + ":base:f"],
             ["to", side + ":platform_outer:b"],
@@ -269,33 +293,33 @@ bzw.add_object("link", [
 
 bzw.add_object("link", [
         ["from", "mid:f"],
-        ["to", "green:platform_mid:f"],
+        ["to", "blue:platform_mid:f"],
         ])
 
 ### flag safety zones
 
 bzw.add_object("zone", [ # red safety 1
-        ["pos",  pybzw.Vector(3, [-114, -190, 1.4])],
+        ["pos",  pybzw.Vector(3, [-114, -174, 1.4])],
         ["size", pybzw.Vector(3, [4, 4, 10])],
         ["safety", 1]
         ])
 
 bzw.add_object("zone", [ # red safety 2
-        ["pos",  pybzw.Vector(3, [114, -190, 1.4])],
+        ["pos",  pybzw.Vector(3, [114, -174, 1.8])],
         ["size", pybzw.Vector(3, [4, 4, 10])],
         ["safety", 1]
         ])
 
-bzw.add_object("zone", [ # green safety 1
-        ["pos",  pybzw.Vector(3, [-114, 190, 1.4])],
+bzw.add_object("zone", [ # blue safety 1
+        ["pos",  pybzw.Vector(3, [-114, 174, 1.8])],
         ["size", pybzw.Vector(3, [4, 4, 10])],
-        ["safety", 1]
+        ["safety", 3]
         ])
 
-bzw.add_object("zone", [ # green safety 2
-        ["pos",  pybzw.Vector(3, [114, 190, 1.4])],
+bzw.add_object("zone", [ # blue safety 2
+        ["pos",  pybzw.Vector(3, [114, 174, 1.8])],
         ["size", pybzw.Vector(3, [4, 4, 10])],
-        ["safety", 1]
+        ["safety", 3]
         ])
 
 ### save to the .bzw
